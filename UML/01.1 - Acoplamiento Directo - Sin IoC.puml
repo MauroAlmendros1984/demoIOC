@@ -1,0 +1,29 @@
+@startuml
+
+title 01.1 - Acoplamiento Directo - Sin IoC
+
+legend left
+ServiceA tiene un atributo privado dependency de
+tipo DependencyClass.
+
+ServiceA crea y usa directamente una instancia
+de DependencyClass, lo que indica un acoplamiento
+directo.
+end legend
+
+class ServiceA {
+    - dependency: DependencyClass
+    + ServiceA()
+    + performService(): void
+}
+
+class DependencyClass {
+    + execute(): void
+}
+
+ServiceA --> DependencyClass : uses
+
+@enduml
+
+ServiceA tiene un atributo privado dependency de tipo DependencyClass.
+ServiceA crea y usa directamente una instancia de DependencyClass, lo que indica un acoplamiento directo.

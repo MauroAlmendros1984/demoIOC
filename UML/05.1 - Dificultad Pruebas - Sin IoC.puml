@@ -1,0 +1,27 @@
+@startuml
+
+title 05.1 - Dificultad Pruebas - Sin IoC
+
+legend left
+ServiceA crea y usa directamente una instancia de
+Repository. Esto hace difícil aislar ServiceA
+durante las pruebas, ya que la dependencia
+(Repository) no se puede sustituir fácilmente
+por un mock o dummy.
+end legend
+
+class ServiceA {
+    - repository: Repository
+    + ServiceA()
+    + performService(): void
+}
+
+class Repository {
+    + fetchData(): Data
+}
+
+ServiceA --> Repository : uses
+
+@enduml
+
+ServiceA crea y usa directamente una instancia de Repository. Esto hace difícil aislar ServiceA durante las pruebas, ya que la dependencia (Repository) no se puede sustituir fácilmente por un mock o dummy.

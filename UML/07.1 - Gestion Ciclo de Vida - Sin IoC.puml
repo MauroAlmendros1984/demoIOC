@@ -1,0 +1,46 @@
+@startuml
+
+title 07.1 - Gestion de Ciclo de Vida - Sin IoC
+
+legend left
+Application es la clase principal que ejecuta la aplicación.
+
+ObjectManager es la Clase responsable de gestionar
+manualmente el ciclo de vida de los objetos,
+incluyendo su creación, inicialización, uso y
+destrucción.
+
+DatabaseConnection es la clase que representa una conexión
+a una base de datos que necesita ser gestionada.
+
+El Problema aqui es que los desarrolladores deben gestionar
+manualmente el ciclo de vida de los objetos, lo que puede
+ser complejo y propenso a errores, especialmente en el
+manejo de recursos externos.
+end legend
+
+class Application {
+    + run()
+}
+
+class ObjectManager {
+    + createObject()
+    + initializeObject()
+    + useObject()
+    + destroyObject()
+}
+
+class DatabaseConnection {
+    + connect()
+    + disconnect()
+}
+
+Application --> ObjectManager : uses
+ObjectManager --> DatabaseConnection : manages
+@enduml
+
+Application: Clase principal que ejecuta la aplicación.
+ObjectManager: Clase responsable de gestionar manualmente el ciclo de vida de los objetos, incluyendo su creación, inicialización, uso y destrucción.
+DatabaseConnection: Clase que representa una conexión a una base de datos que necesita ser gestionada.
+Problemas
+Los desarrolladores deben gestionar manualmente el ciclo de vida de los objetos, lo que puede ser complejo y propenso a errores, especialmente en el manejo de recursos externos.

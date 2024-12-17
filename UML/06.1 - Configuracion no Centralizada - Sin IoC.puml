@@ -1,0 +1,39 @@
+@startuml
+
+title 06.1 - Configuracion no Centralizada - Sin IoC
+
+legend left
+Tenemos la clase principal Application con configuraciones dispersas.
+Luego ServiceA y ServiceB que dependen de configuraciones específicas.
+Y Finalmente el RepositoryA que maneja la lógica de acceso a datos.
+end legend
+
+class Application {
+    - configA: ConfigA
+    - configB: ConfigB
+    + run()
+}
+
+class ServiceA {
+    - configA: ConfigA
+    + processA()
+}
+
+class ServiceB {
+    - configB: ConfigB
+    + processB()
+}
+
+class RepositoryA {
+    - dataSourceA: DataSource
+    + saveA()
+}
+
+Application --> ServiceA : uses
+Application --> ServiceB : uses
+ServiceA --> RepositoryA : uses
+@enduml
+
+Application: Clase principal con configuraciones dispersas.
+ServiceA / ServiceB: Servicios que dependen de configuraciones específicas.
+RepositoryA: Repositorio que maneja la lógica de acceso a datos.

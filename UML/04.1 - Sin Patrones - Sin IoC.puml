@@ -1,0 +1,27 @@
+@startuml
+
+title 04.1 - Sin Patrones - Sin IoC
+
+legend left
+Client es responsable de crear instancias de Service
+directamente, sin aplicar el patrón de inyección de
+dependencias ni el patrón Factory.
+Esto lleva a un código rígido, acoplado y difícil de
+probar.
+end legend
+
+class Client {
+    - service: Service
+    + Client()
+    + performAction(): void
+}
+
+class Service {
+    + execute(): void
+}
+
+Client --> Service : creates and uses
+
+@enduml
+
+Client es responsable de crear instancias de Service directamente, sin aplicar el patrón de inyección de dependencias ni el patrón Factory. Esto lleva a un código rígido, acoplado y difícil de probar.

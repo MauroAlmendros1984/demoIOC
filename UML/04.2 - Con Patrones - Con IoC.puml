@@ -1,0 +1,47 @@
+@startuml
+
+title 04.2 - Con Patrones - Con IoC
+
+legend left
+Client depende de la interfaz ServiceInterface en
+lugar de una implementación concreta, aplicando el
+patrón de inyección de dependencias.
+
+ServiceFactory aplica el patrón Factory, proporcionando
+una instancia de ServiceImplementation a través de
+ServiceInterface, lo que permite desacoplar la lógica
+de creación de objetos.
+
+Con este diseño, el contenedor IoC de Spring puede
+inyectar ServiceImplementation en Client a través de
+ServiceFactory, lo que da lugar a una estructura
+modular, fácil de probar y extensible.
+end legend
+
+class Client {
+    - service: ServiceInterface
+    + Client(service: ServiceInterface)
+    + performAction(): void
+}
+
+interface ServiceInterface {
+    + execute(): void
+}
+
+class ServiceFactory {
+    + createService(): ServiceInterface
+}
+
+class ServiceImplementation implements ServiceInterface {
+    + execute(): void
+}
+
+Client --> ServiceInterface : depends on
+ServiceFactory --> ServiceInterface : creates
+ServiceImplementation --|> ServiceInterface : implements
+
+@enduml
+
+Client depende de la interfaz ServiceInterface en lugar de una implementación concreta, aplicando el patrón de inyección de dependencias.
+ServiceFactory aplica el patrón Factory, proporcionando una instancia de ServiceImplementation a través de ServiceInterface, lo que permite desacoplar la lógica de creación de objetos.
+Con este diseño, el contenedor IoC de Spring puede inyectar ServiceImplementation en Client a través de ServiceFactory, lo que da lugar a una estructura modular, fácil de probar y extensible.

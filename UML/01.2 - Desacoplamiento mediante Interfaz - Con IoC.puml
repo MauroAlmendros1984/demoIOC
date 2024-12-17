@@ -1,0 +1,34 @@
+@startuml
+
+title 01.2 - Desacoplamiento mediante interfaz - Con IoC
+
+legend left
+ServiceA tiene un atributo privado dependency de tipo
+DependencyInterface, en lugar de DependencyClass.
+
+DependencyImplementation implementa DependencyInterface,
+y el contenedor IoC inyecta esta implementación en
+ServiceA, lo que elimina el acoplamiento directo con
+una implementación concreta.
+end legend
+
+class ServiceA {
+    - dependency: DependencyInterface
+    + ServiceA(dependency: DependencyInterface)
+    + performService(): void
+}
+
+interface DependencyInterface {
+    + execute(): void
+}
+
+class DependencyImplementation implements DependencyInterface {
+    + execute(): void
+}
+
+ServiceA --> DependencyInterface : uses
+DependencyImplementation --|> DependencyInterface : implements
+@enduml
+
+ServiceA tiene un atributo privado dependency de tipo DependencyInterface, en lugar de DependencyClass.
+DependencyImplementation implementa DependencyInterface, y el contenedor IoC inyecta esta implementación en ServiceA, lo que elimina el acoplamiento directo con una implementación concreta.

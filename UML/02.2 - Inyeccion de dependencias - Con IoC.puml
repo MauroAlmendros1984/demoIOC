@@ -1,0 +1,32 @@
+@startuml
+
+title 02.2 - Inyeccion de dependencias - Con IoC
+
+legend left
+ServiceA depende de DependencyInterface, lo que
+permite que el contenedor IoC inyecte
+DependencyImplementation según se necesite,
+eliminando el manejo de instancias directas y
+facilitando la reutilización y el mantenimiento
+del código.
+end legend
+
+class ServiceA {
+    - dependency: DependencyInterface
+    + ServiceA(dependency: DependencyInterface)
+    + performService(): void
+}
+
+interface DependencyInterface {
+    + execute(): void
+}
+
+class DependencyImplementation implements DependencyInterface {
+    + execute(): void
+}
+
+ServiceA --> DependencyInterface : depends on
+DependencyImplementation --|> DependencyInterface : implements
+@enduml
+
+ServiceA depende de DependencyInterface, lo que permite que el contenedor IoC inyecte DependencyImplementation según se necesite, eliminando el manejo de instancias directas y facilitando la reutilización y el mantenimiento del código.

@@ -1,0 +1,48 @@
+@startuml
+
+title 03.2 - Escalabilidad - Con IoC
+
+legend left
+En este caso, AppManager depende de interfaces
+(ServiceInterfaceA y ServiceInterfaceB) en lugar de
+implementaciones concretas.
+Las implementaciones (ServiceAImplementation y
+ServiceBImplementation) pueden ser inyectadas por el
+contenedor IoC, desacoplando AppManager de las clases
+específicas y facilitando la escalabilidad y mantenibilidad.
+Esto permite modificar o extender las implementaciones
+sin cambiar el código en AppManager.
+end legend
+
+class AppManager {
+    - serviceA: ServiceInterfaceA
+    - serviceB: ServiceInterfaceB
+    + AppManager(serviceA: ServiceInterfaceA, serviceB: ServiceInterfaceB)
+    + manage(): void
+}
+
+interface ServiceInterfaceA {
+    + executeTaskA(): void
+}
+
+interface ServiceInterfaceB {
+    + executeTaskB(): void
+}
+
+class ServiceAImplementation implements ServiceInterfaceA {
+    + executeTaskA(): void
+}
+
+class ServiceBImplementation implements ServiceInterfaceB {
+    + executeTaskB(): void
+}
+
+AppManager --> ServiceInterfaceA : depends on
+AppManager --> ServiceInterfaceB : depends on
+ServiceAImplementation --|> ServiceInterfaceA : implements
+ServiceBImplementation --|> ServiceInterfaceB : implements
+
+@enduml
+
+En este caso, AppManager depende de interfaces (ServiceInterfaceA y ServiceInterfaceB) en lugar de implementaciones concretas.
+Las implementaciones (ServiceAImplementation y ServiceBImplementation) pueden ser inyectadas por el contenedor IoC, desacoplando AppManager de las clases específicas y facilitando la escalabilidad y mantenibilidad. Esto permite modificar o extender las implementaciones sin cambiar el código en AppManager.

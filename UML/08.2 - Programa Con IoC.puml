@@ -1,0 +1,55 @@
+@startuml
+
+title Programa Con IoC
+
+legend left
+Application: Clase principal que utiliza Service y
+Repository, pero no crea sus instancias directamente.
+Service: Clase que encapsula la lógica de negocio.
+Repository: Clase responsable del acceso a datos.
+Configuration: Clase que define los beans utilizando
+anotaciones como @Configuration.
+
+IoCContainer: Contenedor de Inversión de Control
+que gestiona automáticamente el ciclo de vida y la
+creación de las instancias de los beans.
+end legend
+
+class Application {
+    + run()
+}
+
+class Service {
+    + execute()
+}
+
+class Repository {
+    + save()
+}
+
+class Configuration {
+    + serviceBean(): Service
+    + repositoryBean(): Repository
+}
+
+class IoCContainer {
+    + createBean()
+    + initializeBean()
+    + useBean()
+    + destroyBean()
+}
+
+Application --> Service : uses
+Application --> Repository : uses
+Configuration --> Service : defines
+Configuration --> Repository : defines
+IoCContainer --> Service : manages
+IoCContainer --> Repository : manages
+@enduml
+
+
+Application: Clase principal que utiliza Service y Repository, pero no crea sus instancias directamente.
+Service: Clase que encapsula la lógica de negocio.
+Repository: Clase responsable del acceso a datos.
+Configuration: Clase que define los beans utilizando anotaciones como @Configuration.
+IoCContainer: Contenedor de Inversión de Control que gestiona automáticamente el ciclo de vida y la creación de las instancias de los beans.

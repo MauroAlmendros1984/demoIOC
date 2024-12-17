@@ -1,0 +1,33 @@
+@startuml
+
+title 02.1 - Inyeccion de dependencias - Sin IoC
+
+legend left
+ServiceA crea y maneja directamente DependencyClass,
+y DependencyClass a su vez gestiona NestedDependency.
+Esto refleja una dependencia en cascada y un código
+más complicado de mantener.
+end legend
+
+class ServiceA {
+    - dependency: DependencyClass
+    + ServiceA()
+    + performService(): void
+}
+
+class DependencyClass {
+    - nestedDependency: NestedDependency
+    + DependencyClass()
+    + execute(): void
+}
+
+class NestedDependency {
+    + doWork(): void
+}
+
+ServiceA --> DependencyClass : uses
+DependencyClass --> NestedDependency : uses
+
+@enduml
+
+ServiceA crea y maneja directamente DependencyClass, y DependencyClass a su vez gestiona NestedDependency. Esto refleja una dependencia en cascada y un código más complicado de mantener.

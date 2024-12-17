@@ -1,0 +1,34 @@
+@startuml
+
+title 03.1 - Escalabilidad - Sin IoC
+
+legend left
+AppManager es responsable de crear y gestionar
+instancias de ServiceA y ServiceB directamente.
+Esto complica el código porque AppManager está
+acoplado directamente a las clases ServiceA y
+ServiceB, dificultando su mantenimiento y
+escalabilidad.
+end legend
+
+class AppManager {
+    - serviceA: ServiceA
+    - serviceB: ServiceB
+    + AppManager()
+    + manage(): void
+}
+
+class ServiceA {
+    + executeTaskA(): void
+}
+
+class ServiceB {
+    + executeTaskB(): void
+}
+
+AppManager --> ServiceA : creates and uses
+AppManager --> ServiceB : creates and uses
+
+@enduml
+
+AppManager es responsable de crear y gestionar instancias de ServiceA y ServiceB directamente. Esto complica el código porque AppManager está acoplado directamente a las clases ServiceA y ServiceB, dificultando su mantenimiento y escalabilidad.

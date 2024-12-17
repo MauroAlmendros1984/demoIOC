@@ -1,0 +1,48 @@
+@startuml
+
+title Programa Sin IoC
+
+legend left
+Application: Clase principal que crea y gestiona
+las instancias de ServiceA, ServiceB y Repository
+directamente.
+ServiceA / ServiceB: Clases de servicio que contienen
+la lógica de negocio.
+Repository: Clase responsable del acceso a datos.
+
+La aplicación tiene que manejar la creación de las
+dependencias, lo que puede volverse complicado y
+propenso a errores a medida que el sistema crece.
+end legend
+
+class Application {
+    - serviceA: ServiceA
+    - serviceB: ServiceB
+    - repository: Repository
+    + run()
+}
+
+class ServiceA {
+    + process()
+}
+
+class ServiceB {
+    + process()
+}
+
+class Repository {
+    + save()
+}
+
+Application --> ServiceA : creates
+Application --> ServiceB : creates
+Application --> Repository : creates
+ServiceA --> Repository : uses
+ServiceB --> Repository : uses
+@enduml
+
+Application: Clase principal que crea y gestiona las instancias de ServiceA, ServiceB y Repository directamente.
+ServiceA / ServiceB: Clases de servicio que contienen la lógica de negocio.
+Repository: Clase responsable del acceso a datos.
+Problemas
+La aplicación tiene que manejar la creación de las dependencias, lo que puede volverse complicado y propenso a errores a medida que el sistema crece.

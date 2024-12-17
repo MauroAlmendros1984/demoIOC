@@ -1,0 +1,42 @@
+@startuml
+
+title 05.2 - Facilidad Pruebas - Con IoC
+
+legend left
+ServiceA depende de una interfaz (RepositoryInterface)
+en lugar de una implementación concreta.
+
+Esto permite inyectar diferentes implementaciones,
+como RepositoryImplementation en producción y
+MockRepository durante las pruebas.
+
+De esta manera, es fácil probar ServiceA en aislamiento,
+ya que la dependencia (RepositoryInterface) se puede
+sustituir fácilmente por un mock.
+end legend
+
+class ServiceA {
+    - repository: RepositoryInterface
+    + ServiceA(repository: RepositoryInterface)
+    + performService(): void
+}
+
+interface RepositoryInterface {
+    + fetchData(): Data
+}
+
+class RepositoryImplementation implements RepositoryInterface {
+    + fetchData(): Data
+}
+
+class MockRepository implements RepositoryInterface {
+    + fetchData(): Data
+}
+
+ServiceA --> RepositoryInterface : depends on
+RepositoryImplementation --|> RepositoryInterface : implements
+MockRepository --|> RepositoryInterface : implements
+@enduml
+
+ServiceA depende de una interfaz (RepositoryInterface) en lugar de una implementación concreta.
+Esto permite inyectar diferentes implementaciones, como RepositoryImplementation en producción y MockRepository durante las pruebas. De esta manera, es fácil probar ServiceA en aislamiento, ya que la dependencia (RepositoryInterface) se puede sustituir fácilmente por un mock.

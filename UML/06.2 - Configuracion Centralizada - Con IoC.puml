@@ -1,0 +1,50 @@
+@startuml
+
+title 06.2 - Configuracion Centralizada - Con IoC
+
+legend left
+Aqui tenemos Application como Clase principal que
+utiliza los servicios y repositorios gestionados por IoC.
+Luego el Service con la lógica de negocio.
+El repository con el acceso a datos.
+Configuration es la Clase que define beans usando
+anotaciones.
+Y finalmente ApplicationYml que es el archivo de
+configuración centralizada.
+end legend
+
+class Application {
+    - service: Service
+    - repository: Repository
+    + run()
+}
+
+class Service {
+    + process()
+}
+
+class Repository {
+    + save()
+}
+
+class Configuration {
+    + serviceBean(): Service
+    + repositoryBean(): Repository
+}
+
+class ApplicationYml {
+    - property1: String
+    - property2: String
+}
+
+Application --> Service : uses
+Application --> Repository : uses
+Configuration --> Service : creates
+Configuration --> Repository : creates
+@enduml
+
+Application: Clase principal que utiliza los servicios y repositorios gestionados por IoC.
+Service: Lógica de negocio.
+Repository: Acceso a datos.
+Configuration: Clase que define beans usando anotaciones.
+ApplicationYml: Archivo de configuración centraliza

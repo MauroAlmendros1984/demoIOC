@@ -1,0 +1,64 @@
+@startuml
+
+title 07.2 - Gestion de Ciclo de Vida - Con IoC
+
+legend left
+Application es la clase principal que utiliza servicios
+y repositorios.
+
+El service es la clase que encapsula la lógica de negocio.
+El Repository es la clase responsable del acceso a datos.
+Configuration es la clase que define beans usando
+anotaciones como @Configuration y @Bean.
+
+El SpringContainer es el contenedor IoC que se encarga
+de gestionar automáticamente el ciclo de vida de los objetos
+(beans), incluyendo su creación, inicialización,
+uso y destrucción.
+
+El beneficio es que los desarrolladores pueden
+concentrarse en la lógica de negocio mientras que el
+contenedor IoC de Spring gestiona automáticamente los
+aspectos técnicos del ciclo de vida de los objetos,
+reduciendo errores y mejorando la eficiencia.
+end legend
+
+class Application {
+    + run()
+}
+
+class Service {
+    + execute()
+}
+
+class Repository {
+    + save()
+}
+
+class Configuration {
+    + serviceBean(): Service
+    + repositoryBean(): Repository
+}
+
+class SpringContainer {
+    + createBean()
+    + initializeBean()
+    + useBean()
+    + destroyBean()
+}
+
+Application --> Service : uses
+Application --> Repository : uses
+Configuration --> Service : creates
+Configuration --> Repository : creates
+SpringContainer --> Service : manages
+SpringContainer --> Repository : manages
+@enduml
+
+Application: Clase principal que utiliza servicios y repositorios.
+Service: Clase que encapsula la lógica de negocio.
+Repository: Clase responsable del acceso a datos.
+Configuration: Clase que define beans usando anotaciones como @Configuration y @Bean.
+SpringContainer: Contenedor IoC que se encarga de gestionar automáticamente el ciclo de vida de los objetos (beans), incluyendo su creación, inicialización, uso y destrucción.
+Beneficios
+Los desarrolladores pueden concentrarse en la lógica de negocio mientras que el contenedor IoC de Spring gestiona automáticamente los aspectos técnicos del ciclo de vida de los objetos, reduciendo errores y mejorando la eficiencia.
